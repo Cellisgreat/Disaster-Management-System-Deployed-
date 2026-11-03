@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Operations centre · CivicShield</title>
+<link rel="stylesheet" href="/css/app.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%23d93a2b'/%3E%3Cpath d='M12 5l5 2v4.4c0 3.3-2.1 6.1-5 7.1-2.9-1-5-3.8-5-7.1V7l5-2z' fill='%23fff'/%3E%3C/svg%3E">
+</head>
+<body>
+<div class="app">
+
+  <!-- --------------------------------------------------------- command bar -->
+  <header class="topbar commandbar">
+    <button class="icon-btn hamburger" aria-label="Open navigation">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <a class="bar-brand" href="/">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3l7 3v5.5c0 4.3-2.9 7.9-7 9.5-4.1-1.6-7-5.2-7-9.5V6l7-3z"></path>
+          <path d="M12 9v3.4"></path><path d="M12 15.6h.01"></path>
+        </svg>
+      </span>
+      <span class="bar-brand-text">
+        <strong>CivicShield</strong>
+        <em>Emergency Command</em>
+      </span>
+    </a>
+    <div class="bar-title">
+      <h1 id="page-title">Operations dashboard</h1>
+      <div class="crumbs" id="page-crumbs">CivicShield · overview</div>
+    </div>
+    <div class="topbar-actions">
+      <span class="incident-pill"><span class="pulse"></span>Live operations</span>
+      <span class="badge badge-neutral" id="live-indicator" title="Data refreshed from the C++ backend">
+        <span class="dot"></span>live
+      </span>
+      <button class="btn btn-sm btn-light" id="refresh-btn" title="Reload data from the backend">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M20 11a8 8 0 10-2.3 6.1"/><path d="M20 5v6h-6"/></svg>
+        <span class="btn-label">Refresh</span>
+      </button>
+      <span class="avatar bar-avatar" data-user-initials title="Signed in">AD</span>
+    </div>
+  </header>
+
+
+  <!-- ------------------------------------------------------------ sidebar -->
+  <aside class="sidebar" aria-label="Main navigation">
+
+    <nav class="nav">
+      <div class="nav-label">Overview</div>
+      <a class="nav-item" href="#/dashboard" data-nav="dashboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        Dashboard
+        <span class="count alert hidden" data-badge="alerts">0</span>
+      </a>
+
+      <div class="nav-label">Operations</div>
+      <a class="nav-item" href="#/volunteers" data-nav="volunteers">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M16 20v-1.6c0-1.9-1.6-3.4-3.5-3.4H6.5C4.6 15 3 16.5 3 18.4V20"/><circle cx="9.5" cy="8" r="3.4"/><path d="M21 20v-1.6c0-1.9-1.5-3.4-3.4-3.4"/></svg>
+        Volunteers
+        <span class="count" data-badge="volunteers">—</span>
+      </a>
+      <a class="nav-item" href="#/requests" data-nav="requests">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 4.5h6M9 4.5A1.5 1.5 0 007.5 6v.5h-1A1.5 1.5 0 005 8v10a1.5 1.5 0 001.5 1.5h11A1.5 1.5 0 0019 18V8a1.5 1.5 0 00-1.5-1.5h-1V6A1.5 1.5 0 0015 4.5z"/><path d="M9 12h6M9 15.5h4"/></svg>
+        Disaster requests
+        <span class="count" data-badge="requests">—</span>
+      </a>
+
+      <div class="nav-label">City network</div>
+      <a class="nav-item" href="#/city" data-nav="city">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 4.5L3.5 6.6v12.9L9 17.4l6 2.1 5.5-2.1V4.5L15 6.6 9 4.5z"/><path d="M9 4.5v12.9M15 6.6v12.9"/></svg>
+        City network
+      </a>
+      <a class="nav-item" href="#/route" data-nav="route">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="6" cy="18" r="2.4"/><circle cx="18" cy="6" r="2.4"/><path d="M8.4 18h5.1a3.5 3.5 0 000-7H10a3.5 3.5 0 010-7h5.6"/></svg>
+        Route finder
+      </a>
+      <a class="nav-item" href="#/roads" data-nav="roads">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3l6.5 15h-13L12 3z"/><path d="M8.6 12h6.8"/></svg>
+        Road management
+      </a>
+
+      <div class="nav-label">Administration</div>
+      <a class="nav-item" href="#/accounts" data-nav="accounts">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="3.6"/><path d="M5 20v-1.4c0-2.3 2.1-4.1 4.7-4.1h4.6c2.6 0 4.7 1.8 4.7 4.1V20"/></svg>
+        Accounts
+      </a>
+      <a class="nav-item" href="#/settings" data-nav="settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.34 1.87l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.7 1.7 0 00-1.87-.34 1.7 1.7 0 00-1 1.56V21a2 2 0 11-4 0v-.1A1.7 1.7 0 008 19.3a1.7 1.7 0 00-1.87.34l-.06.06a2 2 0 11-2.83-2.83l.06-.06A1.7 1.7 0 003.7 15a1.7 1.7 0 00-1.56-1H2a2 2 0 110-4h.1A1.7 1.7 0 003.7 9a1.7 1.7 0 00-.34-1.87l-.06-.06a2 2 0 112.83-2.83l.06.06A1.7 1.7 0 008 4.7 1.7 1.7 0 009 3.14V3a2 2 0 114 0v.1a1.7 1.7 0 001 1.56 1.7 1.7 0 001.87-.34l.06-.06a2 2 0 112.83 2.83l-.06.06A1.7 1.7 0 0019.3 9v.1a1.7 1.7 0 001.56 1H21a2 2 0 110 4h-.1a1.7 1.7 0 00-1.5 1z"/></svg>
+        Account settings
+      </a>
+    </nav>
+
+    <div class="sidebar-foot">
+      <div class="user-chip">
+        <span class="avatar" data-user-initials>AD</span>
+        <span class="who">
+          <strong data-user-name>—</strong>
+          <span data-user-role>ADMIN</span>
+        </span>
+        <button class="icon-btn" data-logout title="Sign out" aria-label="Sign out" style="margin-left:auto;color:#8ba0b8">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M15 17l5-5-5-5"/><path d="M20 12H9"/><path d="M12 4H6a2 2 0 00-2 2v12a2 2 0 002 2h6"/></svg>
+        </button>
+      </div>
+      <div class="demo-flag">
+        <strong>Demonstration system.</strong> Educational project — not a certified emergency
+        dispatch service.
+      </div>
+    </div>
+  </aside>
+
+  <!-- --------------------------------------------------------------- main -->
+  <div class="main">
+
+    <main class="content" id="view-root" aria-live="polite">
+      <div class="card"><div class="card-body">
+        <div class="skeleton" style="width:40%"></div>
+        <div class="skeleton" style="width:70%;margin-top:10px"></div>
+        <div class="skeleton" style="width:55%;margin-top:10px"></div>
+      </div></div>
+    </main>
+  </div>
+</div>
+
+<script src="/js/core.js"></script>
+<script src="/js/city-map.js"></script>
+<script src="/js/route-finder.js"></script>
+<script src="/js/admin.js"></script>
+</body>
+</html>

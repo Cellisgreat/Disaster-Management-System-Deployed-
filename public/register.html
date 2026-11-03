@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Create account · CivicShield</title>
+<link rel="stylesheet" href="/css/app.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%23d93a2b'/%3E%3Cpath d='M12 5l5 2v4.4c0 3.3-2.1 6.1-5 7.1-2.9-1-5-3.8-5-7.1V7l5-2z' fill='%23fff'/%3E%3C/svg%3E">
+</head>
+<body>
+<div class="auth-screen">
+
+  <aside class="auth-aside">
+    <a class="brand" href="/" style="text-decoration:none">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3l7 3v5.5c0 4.3-2.9 7.9-7 9.5-4.1-1.6-7-5.2-7-9.5V6l7-3z"></path>
+          <path d="M12 9v3.4"></path><path d="M12 15.6h.01"></path>
+        </svg>
+      </span>
+      <span class="brand-text">
+        <span class="name">CivicShield</span>
+        <span class="tag">Disaster Management System</span>
+      </span>
+    </a>
+
+    <div class="aside-body">
+      <h2>Report an emergency in your area</h2>
+      <p>A citizen account lets you submit disaster requests — rescue, medical help or food —
+         and follow how many people have been covered by the volunteers dispatched to you.</p>
+      <ul class="bullets">
+        <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg> Submit requests with location and headcount</li>
+        <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg> Track coverage progress live</li>
+        <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg> Find the shortest route between city areas</li>
+        <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg> Your requests stay private to your account</li>
+      </ul>
+    </div>
+
+    <div class="aside-foot">
+      Self-registration always creates a PERSON account. Additional administrator accounts can only
+      be created from inside the admin console.
+    </div>
+  </aside>
+
+  <main class="auth-main">
+    <div class="auth-card">
+      <a href="/" class="back muted">← Back to overview</a>
+      <h1 style="margin-top:14px">Create a citizen account</h1>
+      <p class="sub">It takes about ten seconds.</p>
+
+      <div id="auth-error" class="auth-error hidden" role="alert">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="flex:none;margin-top:1px">
+          <path d="M12 8.5v5"/><path d="M12 17h.01"/><circle cx="12" cy="12" r="9"/>
+        </svg>
+        <span id="auth-error-text"></span>
+      </div>
+
+      <form id="register-form" novalidate>
+        <div class="field">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" autocomplete="username"
+                 placeholder="3–24 characters" required autofocus>
+          <div class="hint">Letters, digits, underscore, dot or dash.</div>
+          <div class="err hidden" data-err="username"></div>
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" autocomplete="new-password"
+                 placeholder="At least 6 characters" required>
+          <div class="err hidden" data-err="password"></div>
+        </div>
+        <div class="field">
+          <label for="confirm">Confirm password</label>
+          <input type="password" id="confirm" name="confirm" autocomplete="new-password"
+                 placeholder="Repeat your password" required>
+          <div class="err hidden" data-err="confirm"></div>
+        </div>
+        <button class="btn btn-primary btn-block" type="submit" id="register-btn">Create account</button>
+      </form>
+
+      <p class="alt">Already registered? <a href="/login.html">Sign in instead</a></p>
+
+      <div class="auth-note">
+        This is a demonstration system. Do not submit real emergency information — use your local
+        emergency number instead.
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="/js/core.js"></script>
+<script src="/js/auth.js"></script>
+</body>
+</html>

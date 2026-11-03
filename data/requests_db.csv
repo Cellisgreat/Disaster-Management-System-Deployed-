@@ -1,0 +1,7 @@
+id,service,area_id,people_affected,people_covered,assigned_volunteers,status,message,owner_username
+1,Rescue,8,60,60,1;5,Active,Storm surge flooding at the docks. Fishing crews stranded.,citizen.ravi
+2,Medical Help,1,45,30,3,Active,Elderly residents need insulin and BP medicine.,citizen.meera
+3,Food,12,120,120,2;6;9,Active,Food packets required after a crop fire destroyed stores.,citizen.arjun
+4,Rescue,10,25,25,4,Completed,Landslide trapped four hikers on the ridge.,citizen.ravi
+5,Medical Help,6,80,80,8;10,Completed,Multi-vehicle accident triage at the city centre junction.,citizen.fatima
+6,Food,18,200,40,7,Active,"Village access road under water, food supplies running out.",citizen.meera

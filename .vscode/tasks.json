@@ -1,0 +1,63 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build (MinGW-w64 / g++)",
+      "type": "shell",
+      "command": "g++",
+      "args": [
+        "-std=c++17", "-O2", "-Wall", "-Wextra",
+        "-Ithird_party", "-Isrc",
+        "src/csv_utils.cpp", "src/models.cpp", "src/crypto.cpp", "src/priority_queue.cpp",
+        "src/city_graph.cpp", "src/disaster_management.cpp", "src/authentication.cpp",
+        "src/sessions.cpp", "src/store.cpp", "src/api_json.cpp", "src/api_routes.cpp",
+        "src/input_utils.cpp", "src/menus.cpp", "src/main.cpp",
+        "-o", "DisasterManagementServer.exe",
+        "-lws2_32", "-lpthread"
+      ],
+      "windows": {
+        "args": [
+          "-std=c++17", "-O2", "-Wall", "-Wextra",
+          "-Ithird_party", "-Isrc",
+          "src/csv_utils.cpp", "src/models.cpp", "src/crypto.cpp", "src/priority_queue.cpp",
+          "src/city_graph.cpp", "src/disaster_management.cpp", "src/authentication.cpp",
+          "src/sessions.cpp", "src/store.cpp", "src/api_json.cpp", "src/api_routes.cpp",
+          "src/input_utils.cpp", "src/menus.cpp", "src/main.cpp",
+          "-o", "DisasterManagementServer.exe",
+          "-lws2_32", "-lpthread"
+        ]
+      },
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": ["$gcc"]
+    },
+    {
+      "label": "Run web server (port 8080)",
+      "type": "shell",
+      "command": "./DisasterManagementServer",
+      "windows": { "command": ".\\DisasterManagementServer.exe" },
+      "args": ["--port", "8080"],
+      "isBackground": true,
+      "dependsOn": ["Build (MinGW-w64 / g++)"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Run legacy console interface",
+      "type": "shell",
+      "command": "./DisasterManagementServer",
+      "windows": { "command": ".\\DisasterManagementServer.exe" },
+      "args": ["--cli"],
+      "dependsOn": ["Build (MinGW-w64 / g++)"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Test: core suite",
+      "type": "shell",
+      "command": "g++ -std=c++17 -O2 -Ithird_party -Isrc tests/test_core.cpp src/csv_utils.cpp src/models.cpp src/crypto.cpp src/priority_queue.cpp src/city_graph.cpp src/disaster_management.cpp src/authentication.cpp -o build/test_core && ./build/test_core data",
+      "windows": {
+        "command": "g++ -std=c++17 -O2 -Ithird_party -Isrc tests/test_core.cpp src/csv_utils.cpp src/models.cpp src/crypto.cpp src/priority_queue.cpp src/city_graph.cpp src/disaster_management.cpp src/authentication.cpp -o build\\test_core.exe && build\\test_core.exe data"
+      },
+      "group": "test",
+      "problemMatcher": []
+    }
+  ]
+}

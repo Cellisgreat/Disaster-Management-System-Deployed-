@@ -1,0 +1,21 @@
+id,name,area_id,service,capacity,available
+1,Ravi Kumar,8,Rescue,40,0
+2,Anjali Singh,2,Food,60,0
+3,Dr. Mehta,0,Medical Help,30,0
+4,Suresh Yadav,10,Rescue,25,1
+5,Priya Nair,8,Rescue,20,0
+6,Imran Sheikh,6,Food,40,0
+7,Lakshmi Devi,18,Food,40,0
+8,Dr. Ritu Sharma,6,Medical Help,50,1
+9,Mohan Das,12,Food,20,0
+10,Dr. Ayesha Khan,0,Medical Help,30,1
+11,Vikram Rao,3,Rescue,35,1
+12,Sunita Patel,5,Medical Help,25,1
+13,Rajesh Gupta,7,Rescue,30,1
+14,Neha Verma,13,Food,45,1
+15,Arjun Reddy,9,Rescue,50,1
+16,Fatima Noor,14,Medical Help,20,1
+17,Deepak Mishra,11,Food,30,1
+18,Kiran Joshi,4,Rescue,45,1
+19,Sanjay Kumar,15,Medical Help,35,1
+20,Ananya Iyer,17,Food,25,1

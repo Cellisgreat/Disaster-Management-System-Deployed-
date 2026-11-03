@@ -1,0 +1,22 @@
+{
+  "configurations": [
+    {
+      "name": "MinGW-w64",
+      "includePath": ["${workspaceFolder}/src", "${workspaceFolder}/third_party"],
+      "defines": ["_WIN32"],
+      "compilerPath": "C:/mingw64/bin/g++.exe",
+      "cStandard": "c17",
+      "cppStandard": "c++17",
+      "intelliSenseMode": "windows-gcc-x64"
+    },
+    {
+      "name": "Linux / macOS",
+      "includePath": ["${workspaceFolder}/src", "${workspaceFolder}/third_party"],
+      "compilerPath": "/usr/bin/g++",
+      "cStandard": "c17",
+      "cppStandard": "c++17",
+      "intelliSenseMode": "linux-gcc-x64"
+    }
+  ],
+  "version": 4
+}

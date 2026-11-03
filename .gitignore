@@ -1,0 +1,12 @@
+# build artefacts
+build/
+DisasterManagementServer
+DisasterManagementServer.exe
+*.o
+*.obj
+*.exe
+
+# runtime scratch
+data/*.tmp
+*.log
+tests/_dbg*

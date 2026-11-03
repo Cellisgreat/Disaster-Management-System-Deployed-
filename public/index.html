@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CivicShield — Disaster Management System</title>
+<meta name="description" content="CivicShield is a city-scale disaster coordination platform: volunteer dispatch by shortest travel distance, live request triage and interactive road-network routing. Powered by a C++ backend.">
+<link rel="stylesheet" href="/css/app.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%23d93a2b'/%3E%3Cpath d='M12 5l5 2v4.4c0 3.3-2.1 6.1-5 7.1-2.9-1-5-3.8-5-7.1V7l5-2z' fill='%23fff'/%3E%3C/svg%3E">
+</head>
+<body class="landing">
+
+<!-- ------------------------------------------------------------------ nav -->
+<header class="landing-nav">
+  <a class="brand dark" href="/" style="text-decoration:none">
+    <span class="brand-mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3l7 3v5.5c0 4.3-2.9 7.9-7 9.5-4.1-1.6-7-5.2-7-9.5V6l7-3z"></path>
+        <path d="M12 9v3.4"></path><path d="M12 15.6h.01"></path>
+      </svg>
+    </span>
+    <span class="brand-text">
+      <span class="name">CivicShield</span>
+      <span class="tag">Disaster Management System</span>
+    </span>
+  </a>
+  <nav class="links" aria-label="Sections">
+    <a href="#how">How it works</a>
+    <a href="#features">Capabilities</a>
+    <a href="#network">City network</a>
+    <a href="#access">Demo access</a>
+  </nav>
+  <div class="cta">
+    <a class="btn btn-outline" href="/login.html">Sign in</a>
+    <a class="btn btn-primary" href="/register.html">Create account</a>
+  </div>
+</header>
+
+<!-- ----------------------------------------------------------------- hero -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <span class="eyebrow">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="6"/></svg>
+        Emergency coordination platform
+      </span>
+      <h1>Every request matched to the <span>nearest available volunteer</span>.</h1>
+      <p class="lede">
+        CivicShield coordinates disaster response across a city road network. Citizens report
+        the emergency, a C++ dispatch engine allocates rescue, medical and food volunteers by
+        shortest travel distance, and administrators keep the whole operation under control
+        from a single operations centre.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-danger" href="/login.html">Enter operations centre</a>
+        <a class="btn btn-outline" href="#features">Explore capabilities</a>
+      </div>
+      <p class="cta-note">Demo administrator: <strong>Admin</strong> / <strong>admin123</strong> — change it after signing in.</p>
+
+      <div class="hero-stats" id="hero-stats" aria-live="polite">
+        <div><div class="n" data-stat="volunteers">—</div><div class="l">Volunteers</div></div>
+        <div><div class="n" data-stat="activeRequests">—</div><div class="l">Active requests</div></div>
+        <div><div class="n" data-stat="peopleCovered">—</div><div class="l">People covered</div></div>
+        <div><div class="n" data-stat="areas">—</div><div class="l">City areas</div></div>
+        <div><div class="n" data-stat="roads">—</div><div class="l">Roads mapped</div></div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hv-head">
+        <span class="cdot"></span>
+        <span>Live city network</span>
+        <span style="margin-left:auto" id="hero-net-summary">loading…</span>
+      </div>
+      <div class="hv-body" id="hero-map"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------ how it works -->
+<section class="section" id="how">
+  <div class="section-inner">
+    <div class="section-head">
+      <span class="kicker">How it works</span>
+      <h2>Report → allocate → dispatch → close</h2>
+      <p>A single request triggers the whole pipeline: the graph is searched, the closest
+         suitable volunteers are reserved, and every change is written straight back to the
+         CSV databases.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <h3>The citizen reports</h3>
+        <p>Choose a service category (Rescue, Medical Help or Food), the affected area and how
+           many people need help.</p>
+      </div>
+      <div class="step">
+        <h3>C++ allocates</h3>
+        <p>Volunteers already in the area are dispatched first. Then Dijkstra's algorithm finds
+           the nearest suitable volunteers in other areas.</p>
+      </div>
+      <div class="step">
+        <h3>Availability updates</h3>
+        <p>Assigned volunteers are marked unavailable, coverage is recorded per request and the
+           databases are saved atomically.</p>
+      </div>
+      <div class="step">
+        <h3>Operations close the case</h3>
+        <p>When work is finished an administrator marks the request completed and the volunteers
+           return to the available pool.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- -------------------------------------------------------------- features -->
+<section class="section" id="features" style="background:#f8fafc;border-top:1px solid var(--slate-200);border-bottom:1px solid var(--slate-200)">
+  <div class="section-inner">
+    <div class="section-head">
+      <span class="kicker">Capabilities</span>
+      <h2>Built around real dispatch logic, not mock dashboards</h2>
+      <p>Every number you see is calculated by the C++ backend from the live CSV databases.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature">
+        <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="6" cy="18" r="2.4"/><circle cx="18" cy="6" r="2.4"/><path d="M8.4 18h5.1a3.5 3.5 0 000-7H10a3.5 3.5 0 010-7h5.6"/></svg></div>
+        <h3>Dijkstra shortest routes</h3>
+        <p>Adjacency-list graph with a hand-written linked-list priority queue. Blocked roads are
+           excluded automatically.</p>
+        <div class="tagline">city_graph.cpp · priority_queue.cpp</div>
+      </div>
+      <div class="feature">
+        <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M16 20v-1.6c0-1.9-1.6-3.4-3.5-3.4H6.5C4.6 15 3 16.5 3 18.4V20"/><circle cx="9.5" cy="8" r="3.4"/><path d="M21 20v-1.6c0-1.9-1.5-3.4-3.4-3.4"/></svg></div>
+        <h3>Nearest-volunteer dispatch</h3>
+        <p>Local volunteers first, then distance-ranked reinforcements — capped by each
+           volunteer's people-handling capacity.</p>
+        <div class="tagline">disaster_management.cpp</div>
+      </div>
+      <div class="feature">
+        <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 4.5L3.5 6.6v12.9L9 17.4l6 2.1 5.5-2.1V4.5L15 6.6 9 4.5z"/><path d="M9 4.5v12.9M15 6.6v12.9"/></svg></div>
+        <h3>Interactive city network</h3>
+        <p>All areas and roads drawn from the database, with live open/blocked state and
+           shortest-path highlighting.</p>
+        <div class="tagline">/api/graph · city-map.js</div>
+      </div>
+      <div class="feature">
+        <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="10.5" width="16" height="9" rx="2"/><path d="M8 10.5V7.8a4 4 0 018 0v2.7"/></svg></div>
+        <h3>Role-based access</h3>
+        <p>PBKDF2 password hashing, HttpOnly sessions, throttled logins and server-side role
+           checks on every administrative endpoint.</p>
+        <div class="tagline">authentication.cpp · crypto.cpp</div>
+      </div>
+      <div class="feature">
+        <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><ellipse cx="12" cy="6" rx="7.5" ry="3"/><path d="M4.5 6v12c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3V6"/><path d="M4.5 12c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3"/></svg></div>
+        <h3>CSV persistence</h3>
+        <p>Areas, roads, volunteers, requests and accounts stay in the original CSV files, written
+           atomically so nothing is corrupted.</p>
+        <div class="tagline">data/*.csv · csv_utils.cpp</div>
+      </div>
+      <div class="feature">
+        <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 20V6l8-3 8 3v14"/><path d="M9 20v-5h6v5"/></svg></div>
+        <h3>Operations dashboards</h3>
+        <p>Coverage gaps, unassigned requests, blocked roads and service-wise volunteer
+           distribution, all computed server-side.</p>
+        <div class="tagline">/api/admin/dashboard</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------------------------------------------------------- city network -->
+<section class="section" id="network">
+  <div class="section-inner split">
+    <div>
+      <div class="section-head" style="margin-bottom:16px">
+        <span class="kicker">City network</span>
+        <h2>The dispatch graph, straight from the database</h2>
+        <p>Areas and roads are read from <code class="mono">areas_db.csv</code> and
+           <code class="mono">roads_db.csv</code> at startup. Distances are in kilometres and
+           blocked roads are drawn dashed in red — they are skipped by every route calculation.</p>
+      </div>
+      <div class="grid grid-2">
+        <div class="card" style="padding:14px">
+          <div class="tiny muted" style="text-transform:uppercase;letter-spacing:.07em;font-weight:700">Areas</div>
+          <div class="mono" style="font-size:22px;font-weight:700" data-net="areas">—</div>
+        </div>
+        <div class="card" style="padding:14px">
+          <div class="tiny muted" style="text-transform:uppercase;letter-spacing:.07em;font-weight:700">Roads</div>
+          <div class="mono" style="font-size:22px;font-weight:700" data-net="roads">—</div>
+        </div>
+        <div class="card" style="padding:14px">
+          <div class="tiny muted" style="text-transform:uppercase;letter-spacing:.07em;font-weight:700">Blocked</div>
+          <div class="mono" style="font-size:22px;font-weight:700" data-net="blocked">—</div>
+        </div>
+        <div class="card" style="padding:14px">
+          <div class="tiny muted" style="text-transform:uppercase;letter-spacing:.07em;font-weight:700">Connectivity</div>
+          <div class="mono" style="font-size:22px;font-weight:700" data-net="connected">—</div>
+        </div>
+      </div>
+      <div class="notice notice-info" style="margin-top:16px">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+        <span>The layout is a schematic diagram, not a geographic map: the CSV files store road
+          distances only, so nodes are positioned in a fixed, readable grid.</span>
+      </div>
+    </div>
+    <div class="card" style="overflow:hidden">
+      <div id="network-map"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------------------------------------------------------- demo access -->
+<section class="section" id="access" style="background:#f8fafc;border-top:1px solid var(--slate-200)">
+  <div class="section-inner split">
+    <div>
+      <div class="section-head" style="margin-bottom:14px">
+        <span class="kicker">Try it</span>
+        <h2>Two roles, one coordination platform</h2>
+        <p>Administrators run the operation; citizens report and track their own emergencies.
+           Self-registration always creates a citizen account — only an administrator can create
+           another administrator.</p>
+      </div>
+      <div class="feature-grid" style="grid-template-columns:1fr">
+        <div class="feature" style="border-left:3px solid var(--danger)">
+          <h3>Administrator</h3>
+          <p>Volunteer pool, request triage, road blocking, network routing, account management
+             and live dashboards.</p>
+        </div>
+        <div class="feature" style="border-left:3px solid var(--info)">
+          <h3>Citizen (PERSON)</h3>
+          <p>Submit a disaster request, follow its coverage progress, find the shortest route and
+             see only your own requests.</p>
+        </div>
+      </div>
+    </div>
+    <div class="demo-card">
+      <h3>Demonstration administrator</h3>
+      <p>These credentials ship with the seeded database. The password hash is upgraded to
+         PBKDF2 automatically on first sign-in, and can be changed from Account settings.</p>
+      <div class="cred">
+        <div class="row"><span>Username</span><strong>Admin</strong></div>
+        <div class="row"><span>Password</span><strong>admin123</strong></div>
+        <div class="row"><span>Citizen demo</span><strong>citizen.ravi / ravi1234</strong></div>
+      </div>
+      <a class="btn btn-danger btn-block" href="/login.html" style="margin-top:18px">Sign in to the platform</a>
+      <a class="btn btn-light btn-block" href="/register.html" style="margin-top:10px">Create a citizen account</a>
+    </div>
+  </div>
+</section>
+
+<!-- --------------------------------------------------------------- footer -->
+<footer class="landing-footer">
+  <div class="disclaimer">
+    <strong>Demonstration system.</strong> CivicShield is an educational capstone project, not a
+    certified emergency dispatch service. In a real emergency contact your local emergency number
+    immediately.
+  </div>
+  <div class="inner">
+    <span>CivicShield · Disaster Management System · C++ backend with a REST API and web frontend</span>
+    <span class="mono tiny">v2.0.0-web · <span id="backend-status">checking backend…</span></span>
+  </div>
+</footer>
+
+<script src="/js/core.js"></script>
+<script src="/js/city-map.js"></script>
+<script src="/js/landing.js"></script>
+</body>
+</html>

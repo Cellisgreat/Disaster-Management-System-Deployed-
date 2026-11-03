@@ -1,0 +1,21 @@
+# Version control and editor files
+.git
+.github
+.vscode
+
+# Local build outputs
+build/
+DisasterManagementServer
+DisasterManagementServer.exe
+*.o
+*.obj
+*.exe
+
+# Runtime scratch/log files
+*.log
+data/*.tmp
+
+# Local test artefacts
+tests/_dbg*
+__pycache__/
+*.pyc
